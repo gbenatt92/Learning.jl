@@ -17,6 +17,6 @@ Parents: Probability Distribution, Law of Large Numbers
 Offspring: Regression Analysis, Density Estimation
 ```
 
-Where each topic is a Node (or Vertice) while parents/offspring are topics with the Edge directed to/from the current topic.
+Where each topic is a Node (or Vertex) while parents/offspring are topics with the Edge directed to/from the current topic.
 
 This is a work in progress.

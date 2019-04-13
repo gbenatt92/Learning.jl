@@ -2,7 +2,7 @@
 module TestMain
 
 using Test
-using Learning: Graph, Node, Edge, create_node, create_edge, initialize_graph, add_edge, add_node
+using Learning: Graph, Node, Edge, create_node, create_edge, initialize_graph, add_edge, add_node, add_nodes_and_edges
 
 
 
@@ -44,11 +44,11 @@ using Learning: Graph, Node, Edge, create_node, create_edge, initialize_graph, a
         "/potato/path.txt")
     )
 
-    graph_with_nodes_and_edges = add_edge(graph_with_2_nodes, test_edge)
+    graph_with_nodes_and_edge = add_edge(graph_with_2_nodes, test_edge)
 
-    @test graph_with_nodes_and_edges.name == "test graph"
-    @test graph_with_nodes_and_edges.edges == tuple(Edge("test", "offspring"))
-    @test graph_with_nodes_and_edges.nodes == Dict(
+    @test graph_with_nodes_and_edge.name == "test graph"
+    @test graph_with_nodes_and_edge.edges == [Edge("test", "offspring"), ]
+    @test graph_with_nodes_and_edge.nodes == Dict(
         "test" => Node("test", "this is a test node", nothing, nothing),
         "offspring" => Node("offspring",
         "this is an offspring of test",
@@ -56,6 +56,15 @@ using Learning: Graph, Node, Edge, create_node, create_edge, initialize_graph, a
         "/potato/path.txt")
     )
 
+    nodes = Dict( "test" => test_node, "offspring" => offspring_node)
+    edges = [test_edge, Edge("offspring", "test")]
+
+    graph_with_nodes_and_edges = add_nodes_and_edges(test_graph, nodes, edges)
+
+    @test graph_with_nodes_and_edges.name == "test graph"
+    @test graph_with_nodes_and_edges.edges == [
+        Edge("test", "offspring"), Edge("offspring", "test")]
+    @test graph_with_nodes_and_edges.nodes["test"] == Node("test", "this is a test node", nothing, nothing)
 
 end
 
